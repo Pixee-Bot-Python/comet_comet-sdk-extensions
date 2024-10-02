@@ -10,16 +10,16 @@
 #  Copyright (c) 2022 Cometx Development
 #      Team. All rights reserved.
 # ****************************************
-import random
+import secrets
 
 
 def generate_experiment_name():
     return (
-        random.choice(adjectives)
+        secrets.choice(adjectives)
         + "_"
-        + random.choice(nouns)
+        + secrets.choice(nouns)
         + "_"
-        + str(random.randint(1, 9999))
+        + str(secrets.SystemRandom().randint(1, 9999))
     )
 
 
