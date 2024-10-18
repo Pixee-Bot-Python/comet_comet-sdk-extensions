@@ -49,7 +49,7 @@ def log_points_3d_pcd_file(experiment, filename):
     boxes = []
     fields = ["x", "y", "z"]  # default
     with open(filename) as fp:
-        line = fp.readline()
+        line = fp.readline(5_000_000)
         while line:
             line = line.strip()
             if line.startswith("FIELDS"):
@@ -77,7 +77,7 @@ def log_points_3d_pcd_file(experiment, filename):
                 elif fields == ["j1", "j2", "j3"]:
                     raise Exception("unable to handle j1, j2, j3 fields format")
 
-            line = fp.readline()
+            line = fp.readline(5_000_000)
 
     log_points(filename, experiment, points, boxes)
 
@@ -89,7 +89,7 @@ def log_points_3d_xyz_file(experiment, filename):
     points = []
     boxes = []
     with open(filename) as fp:
-        line = fp.readline()
+        line = fp.readline(5_000_000)
         while line:
             line = line.strip()
             if not line.startswith("#"):
@@ -104,7 +104,7 @@ def log_points_3d_xyz_file(experiment, filename):
                 if not color:
                     color = [255, 255, 255]
                 points.append(adjust_point(xyz) + color)
-            line = fp.readline()
+            line = fp.readline(5_000_000)
 
     log_points(filename, experiment, points, boxes)
 
@@ -131,7 +131,7 @@ def log_points_3d_off_file(experiment, filename):
     vertices, faces, edges = 0, 0, 0
     mode = None
     with open(filename) as fp:
-        line = fp.readline()
+        line = fp.readline(5_000_000)
         count = 0
         while line:
             line = line.strip()
@@ -187,6 +187,6 @@ def log_points_3d_off_file(experiment, filename):
                     break
             else:
                 raise Exception("unknown mode %r" % mode)
-            line = fp.readline()
+            line = fp.readline(5_000_000)
 
     log_points(filename, experiment, points, boxes)
