@@ -12,8 +12,8 @@
 # ****************************************
 
 import os
-import random
 import tempfile
+import secrets
 
 ## Randomize large files
 
@@ -33,7 +33,7 @@ def shuffle_in_memory(filename_in, filename_out):
     with open(filename_in) as fp:
         lines = fp.readlines()
     # Randomize them in place:
-    random.shuffle(lines)
+    secrets.SystemRandom().shuffle(lines)
     # Write the new order out:
     with open(filename_out, "w") as fp:
         fp.writelines(lines)
@@ -60,7 +60,7 @@ def shuffle(
             for i in range(file_split_count)
         ]
         for line in open(filename_in):
-            random_index = random.randint(0, len(temp_files) - 1)
+            random_index = secrets.SystemRandom().randint(0, len(temp_files) - 1)
             temp_files[random_index].write(line)
 
         # Now we shuffle each smaller file
