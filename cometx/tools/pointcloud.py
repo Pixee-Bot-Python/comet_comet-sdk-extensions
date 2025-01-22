@@ -217,7 +217,7 @@ def render(
 
     # Draw points first
     with open(points_filename) as fp:
-        line = fp.readline()
+        line = fp.readline(5_000_000)
         while line:
             data = json.loads(line)
             # Each data can be [x, y, z] or [x, y, z, r, g, b]
@@ -229,7 +229,7 @@ def render(
                 # Default color is white
                 color = (255, 255, 255)
             draw_point_fake(size, fcanvas, transform, point, color)
-            line = fp.readline()
+            line = fp.readline(5_000_000)
 
     # draw fake on canvas
     if fcanvas:
@@ -239,7 +239,7 @@ def render(
 
     # Draw boxes last to show on top of points
     with open(boxes_filename) as fp:
-        line = fp.readline()
+        line = fp.readline(5_000_000)
         while line:
             data = json.loads(line)
             # Each data is {"segments": [...], "name": "prediction", "color": [r, g, b],
@@ -254,7 +254,7 @@ def render(
                 for point2 in points[1:]:
                     draw_line(size, canvas, transform, point1, point2, color)
                     point1 = point2
-            line = fp.readline()
+            line = fp.readline(5_000_000)
 
     return image
 
