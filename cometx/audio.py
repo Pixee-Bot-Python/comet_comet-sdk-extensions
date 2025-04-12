@@ -13,12 +13,12 @@
 
 import io
 import os
-import random
 
 import matplotlib.pyplot as plt
 import numpy
 from comet_ml.convert_utils import write_numpy_array_as_wav
 from scipy.io import wavfile
+import secrets
 
 
 def log_spectrogram(experiment, channel, sample_rate, title, outname, step):
@@ -79,7 +79,7 @@ def log_audio(
         if file_name:
             basename, ext = os.path.splitext(os.path.basename(file_name))
         else:
-            basename = "audio-%s" % random.randint(10000, 99999)
+            basename = "audio-%s" % secrets.SystemRandom().randint(10000, 99999)
 
     elif isinstance(audio_data, str) and audio_data.endswith(".wav"):
         audio_fp = open(audio_data, "rb")
