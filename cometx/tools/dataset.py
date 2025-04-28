@@ -22,10 +22,10 @@ def merge_files(temp_files, filename_out):
     with open(filename_out, "w") as fp_out:
         for temp_file in temp_files:
             with open(temp_file.name) as fp:
-                line = fp.readline()
+                line = fp.readline(5_000_000)
                 while line:
                     fp_out.write(line)
-                    line = fp.readline()
+                    line = fp.readline(5_000_000)
 
 
 def shuffle_in_memory(filename_in, filename_out):
