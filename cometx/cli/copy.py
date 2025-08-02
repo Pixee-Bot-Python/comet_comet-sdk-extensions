@@ -292,7 +292,7 @@ class CopyManager:
         filename = os.path.join(experiment_folder, "others.jsonl")
         if os.path.isfile(filename):
             with open(filename) as fp:
-                line = fp.readline()
+                line = fp.readline(5_000_000)
                 while line:
                     others_json = json.loads(line)
                     if others_json["name"] == "Name":
@@ -300,7 +300,7 @@ class CopyManager:
                             f"{experiment_folder} (\"{others_json['valueCurrent']}\")"
                         )
                         break
-                    line = fp.readline()
+                    line = fp.readline(5_000_000)
         print(f"Copying from {title} to {workspace_dst}/{project_dst}...")
 
         # Copy other project-level items to an experiment:
